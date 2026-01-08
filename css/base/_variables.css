@@ -1,0 +1,15 @@
+:root {
+    /* Couleurs principales */
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
+    
+    /* Espacements */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    
+    /* Z-index pour superposition */
+    --z-navbar: 1000;
+    --z-sidebar: 900;
+    --z-mobile-menu: 1100;
+}
