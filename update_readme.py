@@ -1,10 +1,10 @@
 import requests
 
-USERNAME = "tonutilisateur"
+USERNAME = "ODBDEVOPS"
 README_PATH = "README.md"
 
 # Récupération des repos via l'API GitHub
-url = f"https://api.github.com/users/{USERNAME}/repos?sort=updated"
+url = f"https://api.github.com/users/ODBDEVOPS/repos?sort=updated"
 response = requests.get(url)
 repos = response.json()
 
