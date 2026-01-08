@@ -1,0 +1,32 @@
+/* Menu latéral - styles complètement différents */
+.sidebar-menu {
+    background-color: #f8fafc;
+    width: 250px;
+    height: 100vh;
+    border-right: 1px solid #e2e8f0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: var(--z-sidebar);
+}
+
+.sidebar-menu .menu {
+    padding: var(--space-lg) 0;
+}
+
+.sidebar-menu .menu-link {
+    color: #334155;
+    padding: var(--space-md) var(--space-lg);
+    border-left: 4px solid transparent;
+}
+
+.sidebar-menu .menu-link:hover {
+    background-color: #f1f5f9;
+    border-left-color: var(--primary-color);
+}
+
+.sidebar-menu .menu-item.active .menu-link {
+    background-color: #e0e7ff;
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+}
