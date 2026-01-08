@@ -1,3 +1,9 @@
+/* ========================
+   MAIN NAVIGATION MENU
+   Styles spécifiques au menu principal
+   Ne pas utiliser pour d'autres menus
+   ======================== */
+
 @import url('base/_reset.css');
 @import url('base/_variables.css');
 @import url('components/_menu-base.css');
