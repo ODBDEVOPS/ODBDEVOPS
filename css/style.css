@@ -10,8 +10,8 @@
 /* 5. Styles spécifiques aux pages */
 /* 6. Utilities (helpers) */
 
-@import url('/css/base/_reset.css');
-@import url('/css/base/_variables.css');
+@import url('base/_reset.css');
+@import url('base/_variables.css');
 @import url('components/_menu-base.css');
 @import url('components/_buttons.css');
 @import url('menus/_main-nav.css');
