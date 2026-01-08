@@ -12,6 +12,25 @@ Je suis développeur / passionné de tech et voici quelques-uns de mes projets G
 
 ---
 
+## 🗂️ Structure recommandée
+```
+css/
+├── style.css                    # Fichier principal
+├── base/                        # Styles de base
+│   ├── _reset.css
+│   └── _variables.css
+├── components/                  # Composants réutilisables
+│   ├── _buttons.css
+│   └── _menu-base.css          # Base commune à tous les menus
+├── menus/                       # Dossier spécialisé pour les menus
+│   ├── _main-nav.css           # Menu principal
+│   ├── _sidebar-menu.css       # Menu latéral
+│   ├── _footer-menu.css        # Menu de pied de page
+│   └── _mobile-menu.css        # Menu mobile
+└── utilities/                   # Classes utilitaires
+    └── _helpers.css
+```
+
 ## Contact
 
 - Email : tonemail@example.com  
