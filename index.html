@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEURA | Interface Quantique</title>
+    <style>
+        /* Variables globales et reset */
+        :root {
+            --obsidian: #05050A;
+            --carbon: #0F0F15;
+            --graphite: #1A1A24;
+            --platinum: #E8E8F0;
+            --silver: #C0C0D0;
+            --quantum-blue: #00E0FF;
+            --quantum-purple: #8A2BE2;
+            --neon-cyan: #00FFE0;
+            --neon-magenta: #FF00C8;
+            --glass-light: rgba(232, 232, 240, 0.05);
+            --glass-dark: rgba(5, 5, 10, 0.3);
+            --border-thin: rgba(232, 232, 240, 0.1);
+            --border-glow: rgba(0, 224, 255, 0.4);
+            --transition-super-slow: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-slow: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'SF Mono', 'Roboto Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: clamp(14px, 1vw, 16px);
+            scroll-behavior: smooth;
+            scroll-timeline: --page-scroll block;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--obsidian);
+            color: var(--platinum);
+            line-height: 1.6;
+            font-weight: 300;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(15, 15, 21, 0.8) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 224, 255, 0.03) 0%, transparent 30%),
+                linear-gradient(15deg, var(--obsidian) 0%, var(--carbon) 100%);
+        }
+
+        /* Navigation minimaliste */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(5, 5, 10, 0.7);
+            border-bottom: 1px solid var(--border-thin);
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 400;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--platinum);
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: linear-gradient(to bottom, var(--quantum-blue), var(--quantum-purple));
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--silver);
+            text-decoration: none;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition-fast);
+            opacity: 0.8;
+        }
+
+        .nav-item:hover {
+            color: var(--platinum);
+            opacity: 1;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--quantum-blue);
+            transition: width 0.4s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--border-thin);
+            color: var(--platinum);
+            padding: 0.7rem 1.8rem;
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 224, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .nav-cta:hover::before {
+            left: 100%;
+        }
+
+        .nav-cta:hover {
+            border-color: var(--quantum-blue);
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.1);
+        }
+
+        /* Hero Section - Expérience immersive */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 10;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            color: var(--quantum-blue);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-title strong {
+            font-weight: 400;
+            background: linear-gradient(90deg, var(--platinum), var(--silver));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .hero-title strong::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--quantum-blue), transparent);
+            opacity: 0.5;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--silver);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Grid dynamique asymétrique */
+        .dynamic-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            gap: 1.5rem;
+            padding: 10vw;
+            position: relative;
+        }
+
+        .grid-item {
+            background: var(--glass-light);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-thin);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-slow);
+        }
+
+        .grid-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 224, 255, 0.03), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .grid-item:hover::before {
+            opacity: 1;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+            box-shadow: 0 10px 30px rgba(0, 224, 255, 0.05);
+        }
+
+        .grid-item-large {
+            grid-column: span 8;
+            grid-row: span 2;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .grid-item-medium {
+            grid-column: span 4;
+            grid-row: span 1;
+            padding: 2rem;
+        }
+
+        .grid-item-tall {
+            grid-column: span 3;
+            grid-row: span 3;
+            padding: 2rem;
+        }
+
+        .grid-item-wide {
+            grid-column: span 9;
+            grid-row: span 1;
+            padding: 2rem;
+        }
+
+        .grid-number {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--quantum-blue);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .grid-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .grid-text {
+            font-size: 0.95rem;
+            color: var(--silver);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Terminal interactif */
+        .terminal-container {
+            padding: 0 10vw 10vw;
+        }
+
+        .terminal {
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid var(--border-thin);
+            border-radius: 2px;
+            overflow: hidden;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        .terminal-header {
+            padding: 1rem 1.5rem;
+            background: rgba(15, 15, 21, 0.8);
+            border-bottom: 1px solid var(--border-thin);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #FF5F56; }
+        .terminal-dot.yellow { background: #FFBD2E; }
+        .terminal-dot.green { background: #27CA3F; }
+
+        .terminal-body {
+            padding: 2rem 1.5rem;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-prompt {
+            color: var(--quantum-blue);
+            margin-right: 1rem;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: var(--platinum);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            flex-grow: 1;
+            outline: none;
+        }
+
+        .terminal-output {
+            color: var(--silver);
+            line-height: 1.5;
+        }
+
+        /* Interface data */
+        .data-interface {
+            padding: 0 10vw 10vw;
+        }
+
+        .data-visualization {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .data-bar {
+            flex: 1;
+            height: 300px;
+            background: var(--glass-light);
+            border: 1px solid var(--border-thin);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, var(--quantum-blue), var(--quantum-purple));
+            transition: height 2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .data-label {
+            position: absolute;
+            bottom: -2rem;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--silver);
+        }
+
+        /* Formulaire quantique */
+        .quantum-form {
+            padding: 0 10vw 10vw;
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--silver);
+            margin-bottom: 0.7rem;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-thin);
+            color: var(--platinum);
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+            transition: var(--transition-fast);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--quantum-blue);
+        }
+
+        .form-input:focus + .form-line {
+            transform: scaleX(1);
+        }
+
+        .form-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--quantum-blue), var(--quantum-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 1px solid var(--border-thin);
+            color: var(--platinum);
+            padding: 1rem 2.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            border-color: var(--quantum-blue);
+            box-shadow: 0 0 30px rgba(0, 224, 255, 0.1);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 224, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Effets de lumière et particules */
+        .light-effect {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 224, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            filter: blur(60px);
+            opacity: 0.3;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--quantum-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particle-float 8s infinite linear;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .scroll-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--silver);
+            border-radius: 50%;
+            margin: 1rem 0;
+            transition: var(--transition-fast);
+            opacity: 0.3;
+        }
+
+        .scroll-dot.active {
+            background: var(--quantum-blue);
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+        /* Footer minimaliste */
+        .footer {
+            padding: 5rem 10vw;
+            border-top: 1px solid var(--border-thin);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--silver);
+            letter-spacing: 1px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            color: var(--silver);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: var(--transition-fast);
+        }
+
+        .social-link:hover {
+            color: var(--quantum-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dynamic-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            
+            .grid-item-large {
+                grid-column: span 6;
+            }
+            
+            .grid-item-medium {
+                grid-column: span 3;
+            }
+            
+            .grid-item-tall {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+            
+            .grid-item-wide {
+                grid-column: span 6;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1.5rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-section, .dynamic-grid, .terminal-container, 
+            .data-interface, .quantum-form, .footer {
+                padding: 1.5rem;
+            }
+            
+            .dynamic-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .grid-item {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+            
+            .data-visualization {
+                flex-direction: column;
+            }
+            
+            .scroll-indicator {
+                right: 1.5rem;
+            }
+            
+            .footer {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+        }
+
+        /* Animations et transitions */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+        /* Smooth scrolling personnalisé */
+        .smooth-scroll-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Effet de scan ligne */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--quantum-blue), transparent);
+            box-shadow: 0 0 10px var(--quantum-blue);
+            z-index: 1001;
+            pointer-events: none;
+            opacity: 0.1;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Effets visuels -->
+    <div class="light-effect" id="lightEffect" style="top: 20%; left: 10%;"></div>
+    <div class="light-effect" id="lightEffect2" style="bottom: 10%; right: 10%;"></div>
+    <div class="scan-line"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="logo">NEURA</div>
+        <div class="nav-menu">
+            <a href="#vision" class="nav-item">VISION</a>
+            <a href="#system" class="nav-item">SYSTÈME</a>
+            <a href="#interface" class="nav-item">INTERFACE</a>
+            <a href="#contact" class="nav-item">CONTACT</a>
+            <button class="nav-cta">ACCÈS</button>
+        </div>
+    </nav>
+
+    <!-- Indicateur de scroll -->
+    <div class="scroll-indicator">
+        <div class="scroll-dot active" data-section="hero"></div>
+        <div class="scroll-dot" data-section="grid"></div>
+        <div class="scroll-dot" data-section="terminal"></div>
+        <div class="scroll-dot" data-section="data"></div>
+        <div class="scroll-dot" data-section="contact"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow animate">Interface Quantique v.12.7</span>
+            <h1 class="hero-title animate delay-1">
+                L'évolution de <strong>l'intelligence</strong> et de <strong>l'interaction</strong>
+            </h1>
+            <p class="hero-subtitle animate delay-2">
+                NEURA redéfinit les limites de l'expérience numérique. Une fusion entre élégance minimaliste et puissance computationnelle, conçue pour les penseurs du futur.
+            </p>
+            <button class="nav-cta animate delay-3" style="margin-top: 2rem;">EXPLORER LE SYSTÈME</button>
+        </div>
+    </section>
+
+    <!-- Grid dynamique -->
+    <section class="dynamic-grid" id="grid">
+        <div class="grid-item grid-item-large animate">
+            <div class="grid-number">01</div>
+            <h2 class="grid-title">Architecture neuronale adaptative</h2>
+            <p class="grid-text">Un système qui évolue avec vos besoins, s'adaptant en temps réel aux exigences changeantes de l'environnement numérique.</p>
+        </div>
+        
+        <div class="grid-item grid-item-medium animate delay-1">
+            <div class="grid-number">02</div>
+            <h3 class="grid-title">Latence Zero</h3>
+            <p class="grid-text">Traitement instantané grâce à une architecture distribuée quantique.</p>
+        </div>
+        
+        <div class="grid-item grid-item-medium animate delay-2">
+            <div class="grid-number">03</div>
+            <h3 class="grid-title">Sécurité Quantique</h3>
+            <p class="grid-text">Protection absolue basée sur les principes de l'intrication quantique.</p>
+        </div>
+        
+        <div class="grid-item grid-item-tall animate delay-3">
+            <div class="grid-number">04</div>
+            <h3 class="grid-title">Interface Fluide</h3>
+            <p class="grid-text">Une expérience utilisateur sans friction, où chaque interaction est anticipée et optimisée.</p>
+        </div>
+        
+        <div class="grid-item grid-item-wide animate delay-4">
+            <div class="grid-number">05</div>
+            <h3 class="grid-title">Écosystème Synergique</h3>
+            <p class="grid-text">Intégration transparente avec les plateformes existantes, créant un réseau unifié d'applications et de services.</p>
+        </div>
+    </section>
+
+    <!-- Terminal interactif -->
+    <section class="terminal-container" id="terminal">
+        <h2 class="hero-eyebrow animate">Interface de contrôle</h2>
+        <h3 class="grid-title animate delay-1" style="margin-bottom: 2rem;">Terminal Quantique</h3>
+        
+        <div class="terminal animate delay-2">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">neura:~$</span>
+                    <span class="terminal-output">Initializing quantum interface...</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">neura:~$</span>
+                    <span class="terminal-output">System integrity check: 100%</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">neura:~$</span>
+                    <span class="terminal-output">Neural pathways: ACTIVE</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">neura:~$</span>
+                    <span class="terminal-output">Ready for commands ></span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">neura:~$</span>
+                    <input type="text" class="terminal-input" id="terminalInput" placeholder="Type 'help' for commands" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interface data -->
+    <section class="data-interface" id="data">
+        <h2 class="hero-eyebrow animate">Analyse en temps réel</h2>
+        <h3 class="grid-title animate delay-1" style="margin-bottom: 2rem;">Performances Système</h3>
+        
+        <div class="data-visualization">
+            <div class="data-bar animate delay-2">
+                <div class="data-fill" id="dataFill1" style="height: 0%"></div>
+                <div class="data-label">CPU</div>
+            </div>
+            <div class="data-bar animate delay-3">
+                <div class="data-fill" id="dataFill2" style="height: 0%"></div>
+                <div class="data-label">MÉMOIRE</div>
+            </div>
+            <div class="data-bar animate delay-4">
+                <div class="data-fill" id="dataFill3" style="height: 0%"></div>
+                <div class="data-label">RÉSEAU</div>
+            </div>
+            <div class="data-bar animate delay-5">
+                <div class="data-fill" id="dataFill4" style="height: 0%"></div>
+                <div class="data-label">QUANTUM</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulaire quantique -->
+    <section class="quantum-form" id="contact">
+        <h2 class="hero-eyebrow animate">Accès au système</h2>
+        <h3 class="grid-title animate delay-1" style="margin-bottom: 3rem;">Demande d'accréditation</h3>
+        
+        <form id="accessForm" class="animate delay-2">
+            <div class="form-group">
+                <label class="form-label">IDENTITÉ</label>
+                <input type="text" class="form-input" placeholder="Nom complet">
+                <div class="form-line"></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">IDENTIFIANT QUANTIQUE</label>
+                <input type="email" class="form-input" placeholder="exemple@neura.sys">
+                <div class="form-line"></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">NIVEAU D'ACCÈS REQUIS</label>
+                <input type="text" class="form-input" placeholder="Alpha, Beta, Gamma ou Omega">
+                <div class="form-line"></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">MOTIVATION</label>
+                <textarea class="form-input form-textarea" placeholder="Décrivez votre besoin d'accès au système NEURA"></textarea>
+                <div class="form-line"></div>
+            </div>
+            
+            <button type="submit" class="submit-btn">SOUMETTRE LA DEMANDE</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">NEURA QUANTUM INTERFACE v.12.7</div>
+        <div class="social-links">
+            <a href="#" class="social-link">GITHUB</a>
+            <a href="#" class="social-link">DOCS</a>
+            <a href="#" class="social-link">STATUS</a>
+            <a href="#" class="social-link">BLOG</a>
+        </div>
+        <div class="footer-text">© 2024 NEURA SYSTEMS. TOUS DROITS RÉSERVÉS.</div>
+    </footer>
+
+    <script>
+        // Effet de lumière qui suit la souris
+        const lightEffect = document.getElementById('lightEffect');
+        const lightEffect2 = document.getElementById('lightEffect2');
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            lightEffect.style.transform = `translate(${x * 50}px, ${y * 50}px)`;
+            lightEffect2.style.transform = `translate(${-x * 30}px, ${-y * 30}px)`;
+        });
+
+        // Animation au défilement
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Animation des barres de données
+                    if (entry.target.id === 'data') {
+                        setTimeout(() => {
+                            document.getElementById('dataFill1').style.height = '85%';
+                            document.getElementById('dataFill2').style.height = '72%';
+                            document.getElementById('dataFill3').style.height = '94%';
+                            document.getElementById('dataFill4').style.height = '68%';
+                        }, 300);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments à animer
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mise à jour de l'indicateur de scroll
+        const scrollDots = document.querySelectorAll('.scroll-dot');
+        const sections = document.querySelectorAll('section');
+        
+        function updateScrollIndicator() {
+            let currentSection = '';
+            const scrollPosition = window.scrollY + window.innerHeight / 3;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.id;
+                }
+            });
+            
+            scrollDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === currentSection) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateScrollIndicator);
+        updateScrollIndicator();
+
+        // Terminal interactif
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalBody = document.getElementById('terminalBody');
+        
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const command = terminalInput.value.trim().toLowerCase();
+                terminalInput.value = '';
+                
+                // Ajouter la commande à l'historique
+                const commandLine = document.createElement('div');
+                commandLine.className = 'terminal-line';
+                commandLine.innerHTML = `<span class="terminal-prompt">neura:~$</span><span class="terminal-output">${command}</span>`;
+                terminalBody.appendChild(commandLine);
+                
+                // Traiter la commande
+                let response = '';
+                
+                switch(command) {
+                    case 'help':
+                        response = 'Available commands: status, clear, about, version, quantum';
+                        break;
+                    case 'status':
+                        response = 'System status: OPTIMAL | Quantum coherence: 99.8%';
+                        break;
+                    case 'clear':
+                        terminalBody.innerHTML = '';
+                        const newInputLine = document.createElement('div');
+                        newInputLine.className = 'terminal-line';
+                        newInputLine.innerHTML = `<span class="terminal-prompt">neura:~$</span><input type="text" class="terminal-input" id="terminalInput" placeholder="Type 'help' for commands" autocomplete="off">`;
+                        terminalBody.appendChild(newInputLine);
+                        terminalInput = document.getElementById('terminalInput');
+                        terminalInput.focus();
+                        return;
+                    case 'about':
+                        response = 'NEURA v12.7 - Quantum Neural Interface System';
+                        break;
+                    case 'version':
+                        response = 'Current version: 12.7.3 | Build: QNI-2024-ALPHA';
+                        break;
+                    case 'quantum':
+                        response = 'Quantum processors: ONLINE | Entanglement level: 97.3%';
+                        break;
+                    case '':
+                        response = '';
+                        break;
+                    default:
+                        response = `Command not found: ${command}. Type 'help' for available commands.`;
+                }
+                
+                // Ajouter la réponse
+                if (response) {
+                    const responseLine = document.createElement('div');
+                    responseLine.className = 'terminal-line';
+                    responseLine.innerHTML = `<span class="terminal-output">${response}</span>`;
+                    terminalBody.appendChild(responseLine);
+                }
+                
+                // Réafficher l'invite de commande
+                const inputLine = document.createElement('div');
+                inputLine.className = 'terminal-line';
+                inputLine.innerHTML = `<span class="terminal-prompt">neura:~$</span><input type="text" class="terminal-input" id="terminalInput" placeholder="Type 'help' for commands" autocomplete="off">`;
+                terminalBody.appendChild(inputLine);
+                
+                // Mettre à jour la référence et focus
+                terminalInput = document.getElementById('terminalInput');
+                terminalInput.focus();
+                
+                // Scroll vers le bas
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+
+        // Gestion du formulaire
+        const accessForm = document.getElementById('accessForm');
+        
+        accessForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const submitBtn = accessForm.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'DEMANDE ENVOYÉE';
+            submitBtn.style.borderColor = 'var(--quantum-blue)';
+            submitBtn.style.boxShadow = '0 0 30px rgba(0, 224, 255, 0.3)';
+            
+            // Créer un effet de confirmation
+            const confirmation = document.createElement('div');
+            confirmation.className = 'terminal-output';
+            confirmation.style.marginTop = '2rem';
+            confirmation.style.animation = 'fadeInUp 0.8s ease';
+            confirmation.textContent = '✓ Demande transmise au système NEURA. Vous recevrez une réponse quantique sous 24h.';
+            
+            accessForm.appendChild(confirmation);
+            
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.style.borderColor = '';
+                submitBtn.style.boxShadow = '';
+                confirmation.remove();
+                accessForm.reset();
+            }, 5000);
+        });
+
+        // Génération de particules
+        function createParticles() {
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 3 + 1;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                document.body.appendChild(particle);
+                
+                // Supprimer la particule après son animation
+                setTimeout(() => {
+                    particle.remove();
+                }, (duration + delay) * 1000);
+            }
+        }
+        
+        // Créer des particules régulièrement
+        setInterval(createParticles, 1000);
+        createParticles(); // Initial creation
+
+        // Effet de défilement fluide personnalisé
+        let scrollTimeout;
+        document.addEventListener('wheel', (e) => {
+            clearTimeout(scrollTimeout);
+            
+            // Ralentir le défilement
+            scrollTimeout = setTimeout(() => {
+                window.scrollBy({
+                    top: e.deltaY * 0.3,
+                    behavior: 'smooth'
+                });
+            }, 50);
+        }, { passive: true });
+
+        // Effet de focus sur les inputs
+        const formInputs = document.querySelectorAll('.form-input');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
