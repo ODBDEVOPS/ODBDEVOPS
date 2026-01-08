@@ -1,4 +1,23 @@
 ## Hi there 👋
+# Bonjour, je suis [TonNom] 👋
+
+Je suis développeur / passionné de tech et voici quelques-uns de mes projets GitHub. 🚀
+
+---
+
+## Mes Projets GitHub
+
+<!-- START: REPO_LIST -->
+<!-- Les projets seront insérés ici automatiquement par le script -->
+<!-- END: REPO_LIST -->
+
+---
+
+## Contact
+
+- Email : tonemail@example.com  
+- LinkedIn : [TonProfil](https://linkedin.com/in/tonprofil)  
+- Twitter : [@tonpseudo](https://twitter.com/tonpseudo)
 
 <!--
 **ODBDEVOPS/ODBDEVOPS** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
