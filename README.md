@@ -1,5 +1,4 @@
-## Hi there 👋
-# Bonjour, je suis ODBDEVOPS 👋
+# 👋 Bonjour, je suis ODBDEVOPS 👋
 
 Je suis développeur / passionné de tech et voici quelques-uns de mes projets GitHub. 🚀
 
