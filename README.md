@@ -14,3 +14,11 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+## Mes projets
+
+| Projet | Description | Lien |
+|--------|------------|------|
+| Projet 1 | Une petite app web | [GitHub](https://github.com/tonutilisateur/projet1) |
+| Projet 2 | API RESTful en Python | [GitHub](https://github.com/tonutilisateur/projet2) |
+| Projet 3 | Bot Discord | [GitHub](https://github.com/tonutilisateur/projet3) |
