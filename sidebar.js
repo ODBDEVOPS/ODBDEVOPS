@@ -1,60 +1,64 @@
-// sidebar.js - Gestion de la sidebar à 3 niveaux
+// sidebar.js - Gestion principale de la sidebar
+class SidebarManager {
+    constructor(config = {}) {
+        this.config = {
+            sidebarId: 'sidebar',
+            overlayId: 'sidebar-overlay',
+            closeBtnClass: 'sidebar-close',
+            openBtnClass: 'mobile-toggle',
+            hasSubmenuClass: 'has-submenu',
+            submenuClass: 'submenu',
+            subsubmenuClass: 'subsubmenu',
+            backBtnClass: 'back-btn',
+            arrowClass: 'arrow',
+            activeClass: 'active',
+            bodyOverflowClass: 'no-scroll',
+            animationDuration: 400,
+            debugMode: false,
+            ...config
+        };
 
-document.addEventListener('DOMContentLoaded', function() {
-    // ========== CONFIGURATION ==========
-    const CONFIG = {
-        sidebarId: 'sidebar',
-        overlayId: 'sidebar-overlay',
-        closeBtnClass: 'sidebar-close',
-        openBtnClass: 'mobile-toggle',
-        hasSubmenuClass: 'has-submenu',
-        submenuClass: 'submenu',
-        subsubmenuClass: 'subsubmenu',
-        backBtnClass: 'back-btn',
-        arrowClass: 'arrow',
-        activeClass: 'active',
-        bodyOverflowClass: 'no-scroll',
-        animationDuration: 400,
-        debugMode: false
-    };
-
-    // ========== INITIALISATION ==========
-    let isSidebarOpen = false;
-    let currentSubmenuLevel = 0;
-    const menuStack = [];
-
-    // Éléments DOM
-    const elements = {
-        sidebar: null,
-        overlay: null,
-        closeBtn: null,
-        openBtn: null,
-        hamburger: null,
-        body: document.body
-    };
-
-    // Initialiser les éléments
-    function initElements() {
-        elements.sidebar = document.getElementById(CONFIG.sidebarId);
-        elements.overlay = document.getElementById(CONFIG.overlayId);
-        elements.closeBtn = document.querySelector(`.${CONFIG.closeBtnClass}`);
-        elements.openBtn = document.querySelector(`.${CONFIG.openBtnClass}`);
+        this.isSidebarOpen = false;
+        this.currentSubmenuLevel = 0;
+        this.menuStack = [];
         
-        // Créer le bouton hamburger si non présent
-        if (elements.openBtn && !elements.openBtn.querySelector('.hamburger')) {
-            createHamburgerButton();
-        }
+        this.elements = {
+            sidebar: null,
+            overlay: null,
+            closeBtn: null,
+            openBtn: null,
+            hamburger: null,
+            body: document.body
+        };
+
+        this.init();
+    }
+
+    init() {
+        this.initElements();
+        this.createHamburgerButton();
+        this.setupEventListeners();
+        this.setupAccessibility();
         
-        elements.hamburger = document.querySelector('.hamburger');
-        
-        if (CONFIG.debugMode) {
-            console.log('Éléments initialisés:', elements);
-            console.log('Configuration:', CONFIG);
+        if (this.config.debugMode) {
+            console.log('SidebarManager initialisé:', this);
         }
     }
 
-    // ========== CRÉATION DU BOUTON HAMBURGER ==========
-    function createHamburgerButton() {
+    initElements() {
+        this.elements.sidebar = document.getElementById(this.config.sidebarId);
+        this.elements.overlay = document.getElementById(this.config.overlayId);
+        this.elements.closeBtn = document.querySelector(`.${this.config.closeBtnClass}`);
+        this.elements.openBtn = document.querySelector(`.${this.config.openBtnClass}`);
+        
+        if (!this.elements.sidebar) {
+            console.error(`Élément sidebar (#${this.config.sidebarId}) non trouvé`);
+        }
+    }
+
+    createHamburgerButton() {
+        if (!this.elements.openBtn) return;
+        
         const hamburgerHTML = `
             <button class="hamburger" aria-label="Menu" aria-expanded="false">
                 <span class="hamburger-line line-1"></span>
@@ -63,353 +67,247 @@ document.addEventListener('DOMContentLoaded', function() {
             </button>
         `;
         
-        elements.openBtn.innerHTML = hamburgerHTML;
-        elements.openBtn.classList.add('hamburger-container');
+        this.elements.openBtn.innerHTML = hamburgerHTML;
+        this.elements.openBtn.classList.add('hamburger-container');
+        this.elements.hamburger = this.elements.openBtn.querySelector('.hamburger');
     }
 
-    // ========== GESTION DE LA SIDEBAR ==========
-    function openSidebar() {
-        if (!elements.sidebar || isSidebarOpen) return;
+    open() {
+        if (!this.elements.sidebar || this.isSidebarOpen) return;
         
-        elements.sidebar.classList.add(CONFIG.activeClass);
-        elements.overlay.classList.add(CONFIG.activeClass);
-        elements.body.classList.add(CONFIG.bodyOverflowClass);
+        this.elements.sidebar.classList.add(this.config.activeClass);
+        this.elements.overlay.classList.add(this.config.activeClass);
+        this.elements.body.classList.add(this.config.bodyOverflowClass);
         
-        if (elements.hamburger) {
-            elements.hamburger.setAttribute('aria-expanded', 'true');
-            elements.hamburger.classList.add('active');
+        if (this.elements.hamburger) {
+            this.elements.hamburger.setAttribute('aria-expanded', 'true');
+            this.elements.hamburger.classList.add('active');
         }
         
-        isSidebarOpen = true;
-        currentSubmenuLevel = 0;
-        menuStack.length = 0;
+        this.isSidebarOpen = true;
+        this.currentSubmenuLevel = 0;
+        this.menuStack.length = 0;
         
-        if (CONFIG.debugMode) console.log('Sidebar ouverte');
+        this.emitEvent('sidebar:open');
         
-        // Émettre un événement personnalisé
-        document.dispatchEvent(new CustomEvent('sidebar:open'));
+        if (this.config.debugMode) console.log('Sidebar ouverte');
     }
 
-    function closeSidebar() {
-        if (!elements.sidebar || !isSidebarOpen) return;
+    close() {
+        if (!this.elements.sidebar || !this.isSidebarOpen) return;
         
-        elements.sidebar.classList.remove(CONFIG.activeClass);
-        elements.overlay.classList.remove(CONFIG.activeClass);
-        elements.body.classList.remove(CONFIG.bodyOverflowClass);
+        this.elements.sidebar.classList.remove(this.config.activeClass);
+        this.elements.overlay.classList.remove(this.config.activeClass);
+        this.elements.body.classList.remove(this.config.bodyOverflowClass);
         
-        if (elements.hamburger) {
-            elements.hamburger.setAttribute('aria-expanded', 'false');
-            elements.hamburger.classList.remove('active');
+        if (this.elements.hamburger) {
+            this.elements.hamburger.setAttribute('aria-expanded', 'false');
+            this.elements.hamburger.classList.remove('active');
         }
         
-        // Fermer tous les sous-menus ouverts
-        closeAllSubmenus();
+        this.closeAllSubmenus();
+        this.isSidebarOpen = false;
         
-        isSidebarOpen = false;
+        this.emitEvent('sidebar:close');
         
-        if (CONFIG.debugMode) console.log('Sidebar fermée');
-        
-        // Émettre un événement personnalisé
-        document.dispatchEvent(new CustomEvent('sidebar:close'));
+        if (this.config.debugMode) console.log('Sidebar fermée');
     }
 
-    function toggleSidebar() {
-        if (isSidebarOpen) {
-            closeSidebar();
-        } else {
-            openSidebar();
-        }
+    toggle() {
+        this.isSidebarOpen ? this.close() : this.open();
     }
 
-    // ========== GESTION DES SOUS-MENUS ==========
-    function openSubmenu(submenu, parentItem = null) {
+    openSubmenu(submenu, parentItem = null) {
         if (!submenu) return;
         
-        submenu.classList.add(CONFIG.activeClass);
+        submenu.classList.add(this.config.activeClass);
         
         if (parentItem) {
-            const arrow = parentItem.querySelector(`.${CONFIG.arrowClass}`);
-            if (arrow) {
-                arrow.style.transform = 'rotate(90deg)';
-            }
+            const arrow = parentItem.querySelector(`.${this.config.arrowClass}`);
+            if (arrow) arrow.style.transform = 'rotate(90deg)';
             
-            // Empiler le menu parent
-            menuStack.push({
-                submenu: submenu,
-                parentItem: parentItem,
-                level: currentSubmenuLevel
+            this.menuStack.push({
+                submenu,
+                parentItem,
+                level: this.currentSubmenuLevel
             });
         }
         
-        currentSubmenuLevel++;
+        this.currentSubmenuLevel++;
         
-        if (CONFIG.debugMode) console.log('Sous-menu ouvert, niveau:', currentSubmenuLevel);
+        if (this.config.debugMode) console.log('Sous-menu ouvert, niveau:', this.currentSubmenuLevel);
     }
 
-    function closeSubmenu(submenu, parentItem = null) {
+    closeSubmenu(submenu, parentItem = null) {
         if (!submenu) return;
         
-        submenu.classList.remove(CONFIG.activeClass);
+        submenu.classList.remove(this.config.activeClass);
         
         if (parentItem) {
-            const arrow = parentItem.querySelector(`.${CONFIG.arrowClass}`);
-            if (arrow) {
-                arrow.style.transform = '';
-            }
+            const arrow = parentItem.querySelector(`.${this.config.arrowClass}`);
+            if (arrow) arrow.style.transform = '';
         }
         
-        currentSubmenuLevel = Math.max(0, currentSubmenuLevel - 1);
-        
-        if (CONFIG.debugMode) console.log('Sous-menu fermé, niveau:', currentSubmenuLevel);
+        this.currentSubmenuLevel = Math.max(0, this.currentSubmenuLevel - 1);
     }
 
-    function closeAllSubmenus() {
+    closeAllSubmenus() {
         const activeSubmenus = document.querySelectorAll(
-            `.${CONFIG.submenuClass}.${CONFIG.activeClass}, .${CONFIG.subsubmenuClass}.${CONFIG.activeClass}`
+            `.${this.config.submenuClass}.${this.config.activeClass}, 
+             .${this.config.subsubmenuClass}.${this.config.activeClass}`
         );
         
         activeSubmenus.forEach(submenu => {
-            submenu.classList.remove(CONFIG.activeClass);
+            submenu.classList.remove(this.config.activeClass);
         });
         
-        // Réinitialiser les flèches
-        const arrows = document.querySelectorAll(`.${CONFIG.arrowClass}`);
-        arrows.forEach(arrow => {
+        document.querySelectorAll(`.${this.config.arrowClass}`).forEach(arrow => {
             arrow.style.transform = '';
         });
         
-        // Vider la pile
-        menuStack.length = 0;
-        currentSubmenuLevel = 0;
-        
-        if (CONFIG.debugMode) console.log('Tous les sous-menus fermés');
+        this.menuStack.length = 0;
+        this.currentSubmenuLevel = 0;
     }
 
-    function goBack() {
-        if (menuStack.length === 0) return;
+    goBack() {
+        if (this.menuStack.length === 0) return;
         
-        const lastMenu = menuStack.pop();
-        closeSubmenu(lastMenu.submenu, lastMenu.parentItem);
+        const lastMenu = this.menuStack.pop();
+        this.closeSubmenu(lastMenu.submenu, lastMenu.parentItem);
         
-        if (CONFIG.debugMode) console.log('Retour au niveau précédent');
+        if (this.config.debugMode) console.log('Retour au niveau précédent');
     }
 
-    // ========== GESTION DES ÉVÉNEMENTS ==========
-    function setupEventListeners() {
-        // Ouvrir la sidebar
-        if (elements.openBtn) {
-            elements.openBtn.addEventListener('click', function(e) {
+    setupEventListeners() {
+        // Ouvrir/fermer la sidebar
+        if (this.elements.openBtn) {
+            this.elements.openBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                toggleSidebar();
+                this.toggle();
             });
         }
         
-        // Fermer la sidebar
-        if (elements.closeBtn) {
-            elements.closeBtn.addEventListener('click', closeSidebar);
+        if (this.elements.closeBtn) {
+            this.elements.closeBtn.addEventListener('click', () => this.close());
         }
         
-        if (elements.overlay) {
-            elements.overlay.addEventListener('click', closeSidebar);
+        if (this.elements.overlay) {
+            this.elements.overlay.addEventListener('click', () => this.close());
         }
         
         // Navigation des sous-menus
-        const hasSubmenuItems = document.querySelectorAll(`.${CONFIG.hasSubmenuClass}`);
-        hasSubmenuItems.forEach(item => {
-            const link = item.querySelector('a');
-            const submenu = item.querySelector(`.${CONFIG.submenuClass}, .${CONFIG.subsubmenuClass}`);
-            
-            if (link && submenu) {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    if (!isSidebarOpen) return;
-                    
-                    openSubmenu(submenu, item);
-                });
-            }
-        });
-        
-        // Boutons de retour
-        const backButtons = document.querySelectorAll(`.${CONFIG.backBtnClass}`);
-        backButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
+        document.addEventListener('click', (e) => {
+            const submenuLink = e.target.closest(`.${this.config.hasSubmenuClass} a`);
+            if (submenuLink && this.isSidebarOpen) {
                 e.preventDefault();
                 e.stopPropagation();
-                goBack();
-            });
-        });
-        
-        // Fermer la sidebar lors du clic sur un lien simple
-        const simpleLinks = document.querySelectorAll(`
-            .menu-link:not(.${CONFIG.hasSubmenuClass} > .menu-link), 
-            .submenu-item > a:not(.${CONFIG.hasSubmenuClass} > a)
-        `);
-        
-        simpleLinks.forEach(link => {
-            if (!link.closest(`.${CONFIG.hasSubmenuClass}`)) {
-                link.addEventListener('click', closeSidebar);
+                
+                const parentItem = submenuLink.closest(`.${this.config.hasSubmenuClass}`);
+                const submenu = parentItem.querySelector(`.${this.config.submenuClass}, .${this.config.subsubmenuClass}`);
+                
+                if (submenu) {
+                    this.openSubmenu(submenu, parentItem);
+                }
+            }
+            
+            // Boutons de retour
+            const backBtn = e.target.closest(`.${this.config.backBtnClass}`);
+            if (backBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.goBack();
+            }
+            
+            // Liens simples
+            const simpleLink = e.target.closest(`
+                .menu-link:not(.${this.config.hasSubmenuClass} > .menu-link), 
+                .submenu-item > a:not(.${this.config.hasSubmenuClass} > a)
+            `);
+            
+            if (simpleLink && !simpleLink.closest(`.${this.config.hasSubmenuClass}`)) {
+                this.close();
             }
         });
         
         // Touche Échap
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && isSidebarOpen) {
-                if (currentSubmenuLevel > 0) {
-                    goBack();
-                } else {
-                    closeSidebar();
-                }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isSidebarOpen) {
+                this.currentSubmenuLevel > 0 ? this.goBack() : this.close();
             }
         });
         
-        // Gestion du redimensionnement
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768 && isSidebarOpen) {
-                closeSidebar();
+        // Responsive
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && this.isSidebarOpen) {
+                this.close();
             }
         });
     }
 
-    // ========== ACCESSIBILITÉ ==========
-    function setupAccessibility() {
-        // Navigation au clavier dans la sidebar
-        if (elements.sidebar) {
-            elements.sidebar.addEventListener('keydown', function(e) {
-                if (e.key === 'Tab' && isSidebarOpen) {
-                    const focusableElements = elements.sidebar.querySelectorAll(
-                        'a, button, [tabindex]:not([tabindex="-1"])'
-                    );
-                    
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
-                    
-                    // Boucler le focus à l'intérieur de la sidebar
-                    if (e.shiftKey && document.activeElement === firstElement) {
-                        e.preventDefault();
-                        lastElement.focus();
-                    } else if (!e.shiftKey && document.activeElement === lastElement) {
-                        e.preventDefault();
-                        firstElement.focus();
-                    }
-                }
-            });
-        }
+    setupAccessibility() {
+        if (!this.elements.sidebar) return;
         
-        // Fermer la sidebar si le focus sort
-        document.addEventListener('focusin', function(e) {
-            if (isSidebarOpen && elements.sidebar && !elements.sidebar.contains(e.target)) {
-                const isOverlay = e.target === elements.overlay;
-                const isOpenBtn = e.target.closest(`.${CONFIG.openBtnClass}`);
+        this.elements.sidebar.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab' && this.isSidebarOpen) {
+                const focusableElements = this.elements.sidebar.querySelectorAll(
+                    'a, button, [tabindex]:not([tabindex="-1"])'
+                );
                 
-                if (!isOverlay && !isOpenBtn) {
-                    closeSidebar();
+                if (focusableElements.length === 0) return;
+                
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+                
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
                 }
             }
         });
-    }
-
-    // ========== FONCTIONS PUBLIQUES ==========
-    window.Sidebar = {
-        open: openSidebar,
-        close: closeSidebar,
-        toggle: toggleSidebar,
-        isOpen: () => isSidebarOpen,
         
-        // Pour les développeurs
-        debug: function() {
-            console.log('=== SIDEBAR DEBUG ===');
-            console.log('État:', isSidebarOpen ? 'Ouverte' : 'Fermée');
-            console.log('Niveau actuel:', currentSubmenuLevel);
-            console.log('Pile des menus:', menuStack);
-            console.log('Éléments:', elements);
-            console.log('===================');
-        },
-        
-        // Réinitialiser
-        reset: function() {
-            closeSidebar();
-            closeAllSubmenus();
-            menuStack.length = 0;
-            currentSubmenuLevel = 0;
-            
-            if (CONFIG.debugMode) {
-                console.log('Sidebar réinitialisée');
+        document.addEventListener('focusin', (e) => {
+            if (this.isSidebarOpen && this.elements.sidebar && 
+                !this.elements.sidebar.contains(e.target) &&
+                e.target !== this.elements.overlay &&
+                !e.target.closest(`.${this.config.openBtnClass}`)) {
+                this.close();
             }
-        }
-    };
-
-    // ========== INITIALISATION AU CHARGEMENT ==========
-    function init() {
-        try {
-            initElements();
-            setupEventListeners();
-            setupAccessibility();
-            
-            if (CONFIG.debugMode) {
-                console.log('Sidebar initialisée avec succès');
-                // Exposer l'objet Sidebar globalement pour le débogage
-                window.SidebarDebug = Sidebar;
-            }
-            
-            // Émettre un événement d'initialisation
-            document.dispatchEvent(new CustomEvent('sidebar:ready'));
-            
-        } catch (error) {
-            console.error('Erreur lors de l\'initialisation de la sidebar:', error);
-        }
-    }
-
-    // Démarrer l'initialisation
-    init();
-
-    // ========== OBSERVATEUR DE MUTATION ==========
-    // Pour gérer les changements dynamiques du DOM
-    if (typeof MutationObserver !== 'undefined') {
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'childList') {
-                    // Réattacher les événements si le DOM a changé
-                    const newHasSubmenuItems = document.querySelectorAll(`.${CONFIG.hasSubmenuClass}`);
-                    if (newHasSubmenuItems.length !== hasSubmenuItems.length) {
-                        if (CONFIG.debugMode) console.log('DOM modifié, réattachement des événements');
-                        setupEventListeners();
-                    }
-                }
-            });
-        });
-        
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
         });
     }
-});
 
-// ========== POLYFILLS POUR LES NAVIGATEURS ANCIENS ==========
-if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
-        var el = this;
-        do {
-            if (el.matches(s)) return el;
-            el = el.parentElement || el.parentNode;
-        } while (el !== null && el.nodeType === 1);
-        return null;
-    };
+    emitEvent(eventName, detail = {}) {
+        document.dispatchEvent(new CustomEvent(eventName, { 
+            detail: { ...detail, sidebar: this } 
+        }));
+    }
+
+    // API publique
+    getState() {
+        return {
+            isOpen: this.isSidebarOpen,
+            currentLevel: this.currentSubmenuLevel,
+            menuStack: [...this.menuStack]
+        };
+    }
+
+    debug() {
+        console.log('=== SIDEBAR DEBUG ===');
+        console.log('État:', this.getState());
+        console.log('Éléments:', this.elements);
+        console.log('Configuration:', this.config);
+        console.log('===================');
+    }
+
+    reset() {
+        this.close();
+        this.closeAllSubmenus();
+    }
 }
 
-if (!Element.prototype.matches) {
-    Element.prototype.matches = 
-        Element.prototype.matchesSelector || 
-        Element.prototype.mozMatchesSelector ||
-        Element.prototype.msMatchesSelector || 
-        Element.prototype.oMatchesSelector || 
-        Element.prototype.webkitMatchesSelector ||
-        function(s) {
-            var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-                i = matches.length;
-            while (--i >= 0 && matches.item(i) !== this) {}
-            return i > -1;
-        };
+// Export pour les modules ES6
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = SidebarManager;
 }
