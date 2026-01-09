@@ -1,0 +1,17 @@
+/* Variables et réinitialisation */
+        :root {
+            --primary: #3A7BC8;
+            --secondary: #FF6B35;
+            --accent: #4ECDC4;
+            --metal-dark: #2A3439;
+            --metal-medium: #5A6C7D;
+            --metal-light: #8B9BB4;
+            --rust: #B85233;
+            --energy-blue: #00C2FF;
+            --bronze: #CD7F32;
+            --mechagnome: #8FC93A;
+            --dark-bg: #0F1A24;
+            --darker-bg: #080F16;
+            --text-glow: 0 0 10px rgba(0, 194, 255, 0.5);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
