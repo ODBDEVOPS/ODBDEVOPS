@@ -710,7 +710,58 @@
         }
 
 
+/* Ajoutez ces styles au CSS */
+.no-scroll {
+    overflow: hidden;
+}
 
+.hamburger-container {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.hamburger-line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--energy-blue);
+    border-radius: 2px;
+    transition: var(--transition);
+    box-shadow: var(--text-glow);
+    transform-origin: center;
+}
+
+.hamburger:hover .hamburger-line {
+    background: var(--secondary);
+}
+
+/* Animation du hamburger */
+.hamburger.active .line-1 {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .line-2 {
+    opacity: 0;
+}
+
+.hamburger.active .line-3 {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
 
 /* Ajoutez ces styles CSS à la fin de votre fichier CSS */
 
