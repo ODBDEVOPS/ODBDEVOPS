@@ -37,7 +37,179 @@
             </ul>
         </div>
     </header>
-
+    <!-- Ajoutez ce HTML après le .nav-container dans le header -->
+<div class="sidebar-overlay"></div>
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            <i class="fas fa-cogs"></i>
+            <span>GnomePédia</span>
+        </div>
+        <button class="sidebar-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <ul class="sidebar-menu">
+            <!-- Niveau 1 -->
+            <li class="menu-item">
+                <a href="#hero" class="menu-link">
+                    <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </a>
+            </li>
+            
+            <li class="menu-item has-submenu">
+                <a href="#histoire" class="menu-link">
+                    <i class="fas fa-history"></i>
+                    <span>Histoire</span>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </a>
+                <!-- Niveau 2 -->
+                <ul class="submenu">
+                    <li class="submenu-header">
+                        <button class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Retour
+                        </button>
+                        <h3>Histoire</h3>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#origines">Origines</a>
+                    </li>
+                    <li class="submenu-item has-submenu">
+                        <a href="#chronologie">Chronologie</a>
+                        <i class="fas fa-chevron-right arrow"></i>
+                        <!-- Niveau 3 -->
+                        <ul class="subsubmenu">
+                            <li class="submenu-header">
+                                <button class="back-btn">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Retour
+                                </button>
+                                <h3>Chronologie</h3>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#premiere-ere">Première Ère</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#deuxieme-ere">Deuxième Ère</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#ere-moderne">Ère Moderne</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#guerres">Grandes Guerres</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu-item has-submenu">
+                <a href="#technologie" class="menu-link">
+                    <i class="fas fa-cogs"></i>
+                    <span>Technologie</span>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </a>
+                <ul class="submenu">
+                    <li class="submenu-header">
+                        <button class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Retour
+                        </button>
+                        <h3>Technologie</h3>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#inventions">Inventions</a>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#mecaniques">Systèmes Mécaniques</a>
+                    </li>
+                    <li class="submenu-item has-submenu">
+                        <a href="#energie">Sources d'Énergie</a>
+                        <i class="fas fa-chevron-right arrow"></i>
+                        <ul class="subsubmenu">
+                            <li class="submenu-header">
+                                <button class="back-btn">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Retour
+                                </button>
+                                <h3>Énergie</h3>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#energie-vapeur">Énergie Vapeur</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#energie-arcane">Énergie Arcanique</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#energie-nucleaire">Énergie Nucléaire</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu-item has-submenu">
+                <a href="#personnages" class="menu-link">
+                    <i class="fas fa-users"></i>
+                    <span>Personnages</span>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </a>
+                <ul class="submenu">
+                    <li class="submenu-header">
+                        <button class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Retour
+                        </button>
+                        <h3>Personnages</h3>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#grands-inventeurs">Grands Inventeurs</a>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#chefs-guerriers">Chefs Guerriers</a>
+                    </li>
+                    <li class="submenu-item">
+                        <a href="#legendes">Légendes</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#carte" class="menu-link">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Carte Interactive</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#contact" class="menu-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="social-icons">
+            <a href="#" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" aria-label="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="#" aria-label="Github">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <p class="copyright">© 2023 GnomePédia</p>
+    </div>
+</aside>
     <!-- Section Héro -->
     <section class="hero" id="hero">
         <div class="hero-bg"></div>
