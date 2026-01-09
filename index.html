@@ -732,5 +732,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
     </script>
+
+<!-- Scripts JavaScript -->
+    <!-- Attention: L'ordre d'inclusion est important -->
+    <script src="config.js"></script>            <!-- Configuration -->
+    <script src="utils.js"></script>              <!-- Fonctions utilitaires -->
+    <script src="sidebar.js"></script>            <!-- Gestion de la sidebar -->
+    <script src="animations.js"></script>         <!-- Gestion des animations -->
+    <script src="main.js"></script>               <!-- Initialisation principale -->
+    
+    <!-- Scripts d'initialisation spécifiques -->
+    <script>
+        // Configuration personnalisée (optionnelle)
+        window.CUSTOM_CONFIG = {
+            debugMode: true,
+            animationsEnabled: true
+        };
+        
+        // Événements personnalisés
+        document.addEventListener('app:ready', function() {
+            console.log('Application prête!');
+            
+            // Exemples d'utilisation
+            // window.app.getSidebar().open();
+            // window.app.getAnimations().initCTAAnimations();
+        });
+    </script>
 </body>
 </html>
