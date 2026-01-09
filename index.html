@@ -615,6 +615,122 @@
                 location.setAttribute('data-info', JSON.stringify(locations[locationClass]));
             }
         });
+
+        // Ajoutez ce JavaScript à votre fichier
+document.addEventListener('DOMContentLoaded', function() {
+    // Éléments du DOM
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+    const sidebarClose = document.querySelector('.sidebar-close');
+    const hasSubmenuItems = document.querySelectorAll('.has-submenu');
+    const backButtons = document.querySelectorAll('.back-btn');
+    
+    // Ouvrir la sidebar
+    mobileToggle.innerHTML = `
+        <button class="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    `;
+    
+    const hamburger = document.querySelector('.hamburger');
+    
+    hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openSidebar();
+    });
+    
+    // Fonction pour ouvrir la sidebar
+    function openSidebar() {
+        sidebar.classList.add('active');
+        sidebarOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Fonction pour fermer la sidebar
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // Fermer tous les sous-menus
+        const activeSubmenus = document.querySelectorAll('.submenu.active, .subsubmenu.active');
+        activeSubmenus.forEach(menu => {
+            menu.classList.remove('active');
+        });
+    }
+    
+    // Fermer la sidebar
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+    
+    // Gérer les sous-menus
+    hasSubmenuItems.forEach(item => {
+        const link = item.querySelector('a');
+        const arrow = item.querySelector('.arrow');
+        const submenu = item.querySelector('.submenu, .subsubmenu');
+        
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (submenu) {
+                submenu.classList.add('active');
+                
+                // Animer la flèche
+                if (arrow) {
+                    arrow.style.transform = 'rotate(90deg)';
+                }
+            }
+        });
+    });
+    
+    // Gérer les boutons de retour
+    backButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const submenu = this.closest('.submenu, .subsubmenu');
+            if (submenu) {
+                submenu.classList.remove('active');
+                
+                // Réinitialiser la flèche
+                const parentItem = submenu.closest('.has-submenu');
+                if (parentItem) {
+                    const arrow = parentItem.querySelector('.arrow');
+                    if (arrow) {
+                        arrow.style.transform = '';
+                    }
+                }
+            }
+        });
+    });
+    
+    // Fermer la sidebar quand on clique sur un lien (sauf ceux avec sous-menus)
+    const menuLinks = document.querySelectorAll('.menu-link:not(.has-submenu > .menu-link), .submenu-item > a:not(.has-submenu > a)');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!this.closest('.has-submenu')) {
+                closeSidebar();
+            }
+        });
+    });
+    
+    // Gérer la touche Échap
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+            closeSidebar();
+        }
+    });
+    
+    // Animation du bouton hamburger
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+    });
+});
     </script>
 </body>
 </html>
