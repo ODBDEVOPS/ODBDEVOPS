@@ -17,13 +17,13 @@ let startNav = "" +
             "<nav class=\"primary-nav\">" +
                 "<ul class=\"nav-list\">";
 
-
+// <!-- Navigation navHome -->
 let navHome = "<li><a href=\"#home\" class=\"nav-link active\">" +
 "<i class=\"fas fa-home\"></i>" +
 "<span>Accueil</span>" +
 "</a></li>";
 
-// <!-- Navigation universe -->
+// <!-- Navigation navMenu1 -->
 let navMenu1 = "<li role=\"none\" class=\"nav-item-dropdown\">" +
 "<a href=\"#\" class=\"nav-link\" role=\"menuitem\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
 "<i class=\"fas fa-globe\"></i> ODB <span class=\"dropdown-arrow\"><i class=\"fas fa-chevron-down\"></i></span>" +
@@ -42,15 +42,15 @@ let navMenu1 = "<li role=\"none\" class=\"nav-item-dropdown\">" +
 "<a href=\"#ODB5\" class=\"dropdown-link\" role=\"menuitem\"><i class=\"fas fa-globe-americas\"></i> ODB5</a>" +
 "<a href=\"#ODB6\" class=\"dropdown-link\" role=\"menuitem\"><i class=\"fas fa-circle-notch\"></i> ODB6</a>" +
 "</div></div></div></li>";
-
+// <!-- Navigation intemNavgallery -->
 let intemNavgallery ="<li>" +
 "<a href=\"#gallery\" class=\"nav-link\"><i class=\"fas fa-images\"></i><span>Galerie</span></a>" +
 "</li>";
-
+// <!-- Navigation intemNavContact -->
 let intemNavContact ="<li>" +
 "<a href=\"#contact\" class=\"nav-link\"><i class=\"fas fa-rocket\"></i><span>Contact</span></a>" +
 "</li>";
-
+// <!-- Navigation endNav -->
 let endNav = "</ul></nav>" +
 //<!-- Bouton hamburger -->
 "<button class=\"menu-toggle\" id=\"menuToggle\" aria-label=\"Menu mobile\" aria-expanded=\"false\">" +
