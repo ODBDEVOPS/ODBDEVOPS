@@ -3,804 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GnomePédia - Encyclopédie des Gnomes Mécaniques</title>
-    <meta name="description" content="Découvrez l'univers fascinant des Gnomes Mécaniques, leur histoire, leur technologie et leurs légendes.">
+    <meta name="description" content="CSS Innovation Lab - Expérience immersive en informatique quantique 8K">
+    <meta name="keywords" content="CSS, 8K, quantique, WebGL, visualisation, innovation">
+    <meta name="author" content="CSS Innovation Lab">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Open Graph -->
+    <meta property="og:title" content="CSS Innovation Lab | Rendu Quantique 8K">
+    <meta property="og:description" content="Explorez l'univers digital avec notre moteur de rendu quantique temps réel">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/og-preview.jpg">
     
-    <!-- CSS Principal -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>CSS Innovation Lab | Informatique Quantique 8K</title>
     
-    <!-- CSS pour les animations -->
-    <style>
-        /* Animations supplémentaires */
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(20px); opacity: 0; }
-        }
-        
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-        
-        .tooltip {
-            display: none;
-            position: absolute;
-            background: var(--metal-dark);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            z-index: 10000;
-            border: 1px solid var(--primary);
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 4px;
-            z-index: 10000;
-            animation: slideIn 0.3s ease-out;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        
-        .notification-success {
-            background: var(--accent);
-            color: var(--metal-dark);
-        }
-        
-        .notification-error {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        .notification-info {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .animated {
-            animation: slideIn 0.6s ease-out;
-        }
-        
-        .shine-effect {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.1), 
-                transparent
-            );
-            pointer-events: none;
-        }
-    </style>
+    <link rel="stylesheet" href="css-assets/main.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="css-assets/nebula.css">
 </head>
 <body>
-    <!-- Overlay pour la sidebar -->
-    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+<!-- Overlay pour le menu mobile -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <!-- Background cosmique -->
+<div class="space-background"> 
+    <div class="stars" id="stars-container"></div> 
+    <div class="nebula"></div> 
+</div> 
+    <canvas id="particles-canvas"></canvas>
+<!-- Placeholder where imported HTML will go -->
+    <div id="import-nav-container"></div>
+
     
-    <!-- Header -->
-    <header id="header">
-        <div class="container nav-container">
-            <!-- Logo -->
-            <a href="#hero" class="logo">
-                <i class="fas fa-cogs"></i>
-                <span>GnomePédia</span>
-            </a>
-            
-            <!-- Bouton hamburger -->
-            <div class="mobile-toggle">
-                <!-- Le hamburger sera généré par JavaScript -->
-            </div>
-        </div>
-    </header>
-    
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">
-                <i class="fas fa-cogs"></i>
-                <span>GnomePédia</span>
-            </div>
-            <button class="sidebar-close" aria-label="Fermer la navigation">
-                <i class="fas fa-times"></i>
+
+<!-- Contenu principal -->
+<main>
+<!-- Accueil Section -->
+<section id="home" class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            ACCUEIL L'INCONNU<br>
+            <span style="color: var(--quantum-teal);">AVEC LA PUISSANCE QUANTIQUE</span>
+        </h1>
+        <p class="hero-description">
+            Notre laboratoire d'innovation CSS repousse les limites du web avec un moteur de rendu quantique temps réel. 
+            Découvrez des visualisations cosmiques en résolution 8K, générées à la volée par notre algorithme breveté.
+        </p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary">
+            <i class="fas fa-play"></i>
+                Commencer l'Expérience
             </button>
+            <a href="#demo" class="btn btn-secondary">
+                <i class="fas fa-eye"></i>
+                    Voir la Démo
+            </a>
         </div>
-        
-        <!-- Navigation principale -->
-        <nav class="sidebar-nav">
-            <ul class="sidebar-menu">
-                <!-- Niveau 1 : Accueil -->
-                <li class="menu-item">
-                    <a href="#hero" class="menu-link">
-                        <i class="fas fa-home"></i>
-                        <span>Accueil</span>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-                </li>
-                
-                <!-- Niveau 1 : Histoire -->
-                <li class="menu-item has-submenu">
-                    <a href="#histoire" class="menu-link">
-                        <i class="fas fa-history"></i>
-                        <span>Histoire</span>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-                    <!-- Niveau 2 -->
-                    <ul class="submenu">
-                        <li class="submenu-header">
-                            <button class="back-btn">
-                                <i class="fas fa-arrow-left"></i>
-                                Retour
-                            </button>
-                            <h3>Histoire</h3>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#origines">Origines Antiques</a>
-                        </li>
-                        <li class="submenu-item has-submenu">
-                            <a href="#chronologie">Chronologie</a>
-                            <i class="fas fa-chevron-right arrow"></i>
-                            <!-- Niveau 3 -->
-                            <ul class="subsubmenu">
-                                <li class="submenu-header">
-                                    <button class="back-btn">
-                                        <i class="fas fa-arrow-left"></i>
-                                        Retour
-                                    </button>
-                                    <h3>Chronologie</h3>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#premiere-ere">Première Ère</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#deuxieme-ere">Deuxième Ère</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#ere-moderne">Ère Moderne</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#guerres">Grandes Guerres</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#expansion">Expansion Territoriale</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <!-- Niveau 1 : Technologie -->
-                <li class="menu-item has-submenu">
-                    <a href="#technologie" class="menu-link">
-                        <i class="fas fa-cogs"></i>
-                        <span>Technologie</span>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-                    <!-- Niveau 2 -->
-                    <ul class="submenu">
-                        <li class="submenu-header">
-                            <button class="back-btn">
-                                <i class="fas fa-arrow-left"></i>
-                                Retour
-                            </button>
-                            <h3>Technologie</h3>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#inventions">Inventions Majeures</a>
-                        </li>
-                        <li class="submenu-item has-submenu">
-                            <a href="#mecaniques">Systèmes Mécaniques</a>
-                            <i class="fas fa-chevron-right arrow"></i>
-                            <!-- Niveau 3 -->
-                            <ul class="subsubmenu">
-                                <li class="submenu-header">
-                                    <button class="back-btn">
-                                        <i class="fas fa-arrow-left"></i>
-                                        Retour
-                                    </button>
-                                    <h3>Systèmes Mécaniques</h3>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#engrenages">Systèmes d'Engrenages</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#pneumatique">Systèmes Pneumatiques</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#hydraulique">Systèmes Hydrauliques</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="submenu-item has-submenu">
-                            <a href="#energie">Sources d'Énergie</a>
-                            <i class="fas fa-chevron-right arrow"></i>
-                            <!-- Niveau 3 -->
-                            <ul class="subsubmenu">
-                                <li class="submenu-header">
-                                    <button class="back-btn">
-                                        <i class="fas fa-arrow-left"></i>
-                                        Retour
-                                    </button>
-                                    <h3>Sources d'Énergie</h3>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#energie-vapeur">Énergie Vapeur</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#energie-arcane">Énergie Arcanique</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#energie-nucleaire">Énergie Nucléaire</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#robotique">Robotique Avancée</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <!-- Niveau 1 : Personnages -->
-                <li class="menu-item has-submenu">
-                    <a href="#personnages" class="menu-link">
-                        <i class="fas fa-users"></i>
-                        <span>Personnages</span>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-                    <!-- Niveau 2 -->
-                    <ul class="submenu">
-                        <li class="submenu-header">
-                            <button class="back-btn">
-                                <i class="fas fa-arrow-left"></i>
-                                Retour
-                            </button>
-                            <h3>Personnages</h3>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#grands-inventeurs">Grands Inventeurs</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#chefs-guerriers">Chefs Guerriers</a>
-                        </li>
-                        <li class="submenu-item has-submenu">
-                            <a href="#legendes">Légendes</a>
-                            <i class="fas fa-chevron-right arrow"></i>
-                            <!-- Niveau 3 -->
-                            <ul class="subsubmenu">
-                                <li class="submenu-header">
-                                    <button class="back-btn">
-                                        <i class="fas fa-arrow-left"></i>
-                                        Retour
-                                    </button>
-                                    <h3>Légendes</h3>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#mekkatorque">Grand Chef Mekkatorque</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#gelbin">Gelbin Mekkanivelle</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="#chromie">Chromie</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#heroes">Héros Modernes</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <!-- Niveau 1 : Carte -->
-                <li class="menu-item">
-                    <a href="#carte" class="menu-link">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <span>Carte Interactive</span>
-                    </a>
-                </li>
-                
-                <!-- Niveau 1 : Contact -->
-                <li class="menu-item has-submenu">
-                    <a href="#contact" class="menu-link">
-                        <i class="fas fa-envelope"></i>
-                        <span>Contact & Communauté</span>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-                    <!-- Niveau 2 -->
-                    <ul class="submenu">
-                        <li class="submenu-header">
-                            <button class="back-btn">
-                                <i class="fas fa-arrow-left"></i>
-                                Retour
-                            </button>
-                            <h3>Contact</h3>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#newsletter">Newsletter</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#forum">Forums Communautaires</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="#contribution">Contribuer</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        
-        <!-- Footer de la sidebar -->
-        <div class="sidebar-footer">
-            <div class="social-icons">
-                <a href="https://twitter.com" target="_blank" aria-label="Twitter" data-tooltip="Suivez-nous sur Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://discord.com" target="_blank" aria-label="Discord" data-tooltip="Rejoignez notre Discord">
-                    <i class="fab fa-discord"></i>
-                </a>
-                <a href="https://github.com" target="_blank" aria-label="GitHub" data-tooltip="Code source sur GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://youtube.com" target="_blank" aria-label="YouTube" data-tooltip="Chaîne YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
+    </div>
+</section>
+
+<!-- Section Galerie -->
+        <section id="gallery" class="section">     
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">GALERIE INTERACTIVE 8K</h2>
+                    <p class="section-subtitle">Explorez nos visualisations en ultra-haute définition</p>
+                </div>
+                <!-- Contenu de la section... -->
             </div>
-            <p class="copyright">© 2023 GnomePédia - Tous droits réservés</p>
-        </div>
-    </aside>
-    
-    <!-- Section Héro -->
-    <section id="hero" class="hero">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Gnomes Mécaniques</h1>
-                    <p class="hero-subtitle">L'Ingénierie au Service de la Magie</p>
-                    <p>Explorez l'univers fascinant des gnomes mécaniques, maîtres de la technologie et de l'innovation. Découvrez leur histoire millénaire, leurs inventions révolutionnaires et leurs légendes épiques.</p>
-                    <div class="hero-buttons">
-                        <a href="#histoire" class="cta-button">Découvrir l'Histoire</a>
-                        <a href="#technologie" class="cta-button secondary">Explorer la Technologie</a>
-                    </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">CONTACTEZ NOTRE ÉQUIPE</h2>
+                    <p class="section-subtitle">Prêt à repousser les limites du numérique avec nous ?</p>
                 </div>
-                <div class="hero-visual">
-                    <div class="gnome-container">
-                        <div class="gnome-silhouette">
-                            <div class="gnome-goggles">
-                                <div class="goggle-lens"></div>
-                                <div class="goggle-lens"></div>
-                            </div>
-                            <div class="gnome-clothes"></div>
-                            <div class="gnome-tools">
-                                <div class="tool">
-                                    <i class="fas fa-wrench"></i>
-                                </div>
-                                <div class="tool">
-                                    <i class="fas fa-bolt"></i>
-                                </div>
-                                <div class="tool">
-                                    <i class="fas fa-cog"></i>
-                                </div>
-                                <div class="tool">
-                                    <i class="fas fa-hammer"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gear"></div>
-                    </div>
-                </div>
+                <!-- Contenu de la section... -->
             </div>
-        </div>
-    </section>
-    
-    <!-- Section Histoire -->
-    <section id="histoire" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Histoire Millénaire</h2>
-                <p>Des origines mystérieuses à l'âge d'or de la technologie mécanique</p>
-            </div>
-            
-            <div class="timeline">
-                <!-- Item 1 -->
-                <div class="timeline-item" data-delay="0.1">
-                    <h3 class="timeline-title">Origines Antiques</h3>
-                    <div class="timeline-date">Ère Pré-Mécanique</div>
-                    <p>Les premières traces de civilisation gnome remontent à plus de 10,000 ans. Vivant dans les montagnes, ils développaient déjà une compréhension avancée de la mécanique et de la géologie.</p>
-                </div>
-                
-                <!-- Item 2 -->
-                <div class="timeline-item" data-delay="0.2">
-                    <h3 class="timeline-title">Découverte de la Vapeur</h3>
-                    <div class="timeline-date">An 500 P.M.</div>
-                    <p>La découverte accidentelle des propriétés de la vapeur sous pression par le gnome Thermidor marque le début de la révolution industrielle gnome.</p>
-                </div>
-                
-                <!-- Item 3 -->
-                <div class="timeline-item" data-delay="0.3">
-                    <h3 class="timeline-title">Fondation de Gnomeregan</h3>
-                    <div class="timeline-date">An 1000 P.M.</div>
-                    <p>Construction de la cité souterraine de Gnomeregan, merveille d'ingénierie et capitale technologique du monde gnome.</p>
-                </div>
-                
-                <!-- Item 4 -->
-                <div class="timeline-item" data-delay="0.4">
-                    <h3 class="timeline-title">L'Âge d'Or</h3>
-                    <div class="timeline-date">An 1500-1800 P.M.</div>
-                    <p>Période de prospérité et d'innovation sans précédent. Invention des premiers automates, systèmes de transport souterrain et réseaux de communication.</p>
-                </div>
-                
-                <!-- Item 5 -->
-                <div class="timeline-item" data-delay="0.5">
-                    <h3 class="timeline-title">Grande Guerre Mécanique</h3>
-                    <div class="timeline-date">An 1850 P.M.</div>
-                    <p>Conflit dévastateur contre les trolls des montagnes, menant à la perte temporaire de nombreuses technologies avancées.</p>
-                </div>
-                
-                <!-- Item 6 -->
-                <div class="timeline-item" data-delay="0.6">
-                    <h3 class="timeline-title">Renaissance Moderne</h3>
-                    <div class="timeline-date">An 1900-Présent</div>
-                    <p>Réhabilitation de Gnomeregan et nouvelle ère d'innovation avec l'intégration de la magie arcanique à la technologie.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Section Technologie -->
-    <section id="technologie" class="section tech">
-        <div class="container">
-            <div class="section-title">
-                <h2>Technologie Avancée</h2>
-                <p>Des inventions révolutionnaires qui ont changé le monde</p>
-            </div>
-            
-            <div class="tech-grid">
-                <!-- Carte 1 -->
-                <div class="tech-card" data-tooltip="Système breveté depuis 1502 P.M.">
-                    <div class="tech-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Engrenages Précis</h3>
-                    <p>Des systèmes d'engrenages à tolérance micronique permettant des machines d'une précision chirurgicale.</p>
-                </div>
-                
-                <!-- Carte 2 -->
-                <div class="tech-card" data-tooltip="Énergie verte et renouvelable">
-                    <div class="tech-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Générateurs à Vapeur</h3>
-                    <p>Sources d'énergie propres et efficaces alimentant les cités gnomes depuis des siècles.</p>
-                </div>
-                
-                <!-- Carte 3 -->
-                <div class="tech-card" data-tooltip="Technologie de pointe">
-                    <div class="tech-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Automates Intelligents</h3>
-                    <p>Des assistants mécaniques capables d'apprendre et de s'adapter à leur environnement.</p>
-                </div>
-                
-                <!-- Carte 4 -->
-                <div class="tech-card" data-tooltip="Sécurisé et fiable">
-                    <div class="tech-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Défenses Mécaniques</h3>
-                    <p>Systèmes de sécurité avancés protégeant les cités gnomes des invasions.</p>
-                </div>
-                
-                <!-- Carte 5 -->
-                <div class="tech-card" data-tooltip="Révolutionnaire">
-                    <div class="tech-icon">
-                        <i class="fas fa-satellite"></i>
-                    </div>
-                    <h3>Communication à Distance</h3>
-                    <p>Réseaux de communication instantanée à travers les montagnes et les continents.</p>
-                </div>
-                
-                <!-- Carte 6 -->
-                <div class="tech-card" data-tooltip="Fusion magie/technologie">
-                    <div class="tech-icon">
-                        <i class="fas fa-magic"></i>
-                    </div>
-                    <h3>Techno-Arcane</h3>
-                    <p>Fusion révolutionnaire de la magie arcanique avec la technologie mécanique.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Section Personnages -->
-    <section id="personnages" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Figures Légendaires</h2>
-                <p>Les gnomes qui ont façonné l'histoire par leur génie et leur courage</p>
-            </div>
-            
-            <div class="characters-container">
-                <!-- Personnage 1 -->
-                <div class="character-card">
-                    <div class="character-img">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3>Grand Chef Mekkatorque</h3>
-                    <p class="character-title">Dirigeant Suprême</p>
-                    <p>Leader charismatique ayant mené la renaissance de Gnomeregan après la Grande Guerre Mécanique.</p>
-                </div>
-                
-                <!-- Personnage 2 -->
-                <div class="character-card">
-                    <div class="character-img">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <h3>Gelbin Mekkanivelle</h3>
-                    <p class="character-title">Grand Inventeur</p>
-                    <p>Créateur du célèbre "Mécabot" et de nombreuses inventions qui ont révolutionné la vie quotidienne.</p>
-                </div>
-                
-                <!-- Personnage 3 -->
-                <div class="character-card">
-                    <div class="character-img">
-                        <i class="fas fa-hat-wizard"></i>
-                    </div>
-                    <h3>Chromie</h3>
-                    <p class="character-title">Mage du Temps</p>
-                    <p>Gnome de bronze maîtrisant les flux temporels et protectrice des lignes du temps.</p>
-                </div>
-                
-                <!-- Personnage 4 -->
-                <div class="character-card">
-                    <div class="character-img">
-                        <i class="fas fa-chess-queen"></i>
-                    </div>
-                    <h3>Mimiron</h3>
-                    <p class="character-title">Architecte Céleste</p>
-                    <p>Créateur des titans mécaniques et architecte des merveilles technologiques les plus complexes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Section Carte -->
-    <section id="carte" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Carte Interactive</h2>
-                <p>Explorez les territoires et cités importantes du monde gnome</p>
-            </div>
-            
-            <div class="map-container">
-                <div class="map-visual">
-                    <!-- Points d'intérêt sur la carte -->
-                    <div class="location gnomeregan" data-tooltip="Capitale technologique">
-                        <i class="fas fa-city"></i>
-                    </div>
-                    <div class="location forgefer" data-tooltip="Forge principale">
-                        <i class="fas fa-industry"></i>
-                    </div>
-                    <div class="location uldaman" data-tooltip="Site archéologique">
-                        <i class="fas fa-monument"></i>
-                    </div>
-                    <div class="location mecagone" data-tooltip="Cité mécanique">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                </div>
-                
-                <div class="map-info">
-                    <h3>Principaux Sites Gnomes</h3>
-                    <ul>
-                        <li><strong>Gnomeregan</strong> - Capitale souterraine et centre technologique</li>
-                        <li><strong>Forgefer</strong> - Complexe industriel et centre de production</li>
-                        <li><strong>Uldaman</strong> - Site archéologique contenant des technologies anciennes</li>
-                        <li><strong>Mécagone</strong> - Cité flottante entièrement automatisée</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Section Contact -->
-    <section id="contact" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Rejoignez la Communauté</h2>
-                <p>Participez à l'expansion de GnomePédia et partagez vos connaissances</p>
-            </div>
-            
-            <div class="contact-container">
-                <div class="contact-form">
-                    <h3>Abonnez-vous à la Newsletter</h3>
-                    <form id="newsletter-form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Votre nom" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Votre email" required>
-                        </div>
-                        <div class="form-group">
-                            <select id="interest" name="interest">
-                                <option value="">Sujet d'intérêt principal</option>
-                                <option value="histoire">Histoire</option>
-                                <option value="technologie">Technologie</option>
-                                <option value="personnages">Personnages</option>
-                                <option value="cartes">Cartes et Géographie</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Vos commentaires ou suggestions..." rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="cta-button">S'abonner</button>
-                    </form>
-                </div>
-                
-                <div class="contact-info">
-                    <h3>Contribuer à GnomePédia</h3>
-                    <p>GnomePédia est un projet communautaire. Vous pouvez contribuer de plusieurs manières :</p>
-                    <ul>
-                        <li><i class="fas fa-edit"></i> <strong>Éditer des articles</strong> - Améliorez le contenu existant</li>
-                        <li><i class="fas fa-plus-circle"></i> <strong>Ajouter du contenu</strong> - Créez de nouveaux articles</li>
-                        <li><i class="fas fa-images"></i> <strong>Partager des médias</strong> - Illustrations, schémas, plans</li>
-                        <li><i class="fas fa-bug"></i> <strong>Signaler des erreurs</strong> - Aidez-nous à améliorer</li>
-                    </ul>
-                    
-                    <div class="community-links">
-                        <a href="#" class="community-link">
-                            <i class="fab fa-discord"></i>
-                            <span>Discord Communautaire</span>
-                        </a>
-                        <a href="#" class="community-link">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub du Projet</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <!-- Colonne 1 -->
-                <div class="footer-column">
-                    <h3>GnomePédia</h3>
-                    <p>L'encyclopédie libre et collaborative dédiée à l'univers des gnomes mécaniques. Notre mission est de préserver et diffuser la connaissance gnome.</p>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <!-- Colonne 2 -->
-                <div class="footer-column">
-                    <h3>Navigation Rapide</h3>
-                    <ul class="footer-links">
-                        <li><a href="#hero"><i class="fas fa-chevron-right"></i> Accueil</a></li>
-                        <li><a href="#histoire"><i class="fas fa-chevron-right"></i> Histoire</a></li>
-                        <li><a href="#technologie"><i class="fas fa-chevron-right"></i> Technologie</a></li>
-                        <li><a href="#personnages"><i class="fas fa-chevron-right"></i> Personnages</a></li>
-                        <li><a href="#carte"><i class="fas fa-chevron-right"></i> Carte</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Colonne 3 -->
-                <div class="footer-column">
-                    <h3>Ressources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-book"></i> Archives Historiques</a></li>
-                        <li><a href="#"><i class="fas fa-blueprint"></i> Plans Techniques</a></li>
-                        <li><a href="#"><i class="fas fa-map"></i> Cartes Détaillées</a></li>
-                        <li><a href="#"><i class="fas fa-database"></i> Base de Données</a></li>
-                        <li><a href="#"><i class="fas fa-download"></i> Téléchargements</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Colonne 4 -->
-                <div class="footer-column">
-                    <h3>Contact</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:contact@gnomepedia.org"><i class="fas fa-envelope"></i> contact@gnomepedia.org</a></li>
-                        <li><a href="#"><i class="fas fa-question-circle"></i> Centre d'Aide</a></li>
-                        <li><a href="#"><i class="fas fa-file-contract"></i> Mentions Légales</a></li>
-                        <li><a href="#"><i class="fas fa-shield-alt"></i> Politique de Confidentialité</a></li>
-                        <li><a href="#"><i class="fas fa-handshake"></i> Partenariats</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>© 2023 GnomePédia - Tous droits réservés. Le contenu est disponible sous licence Creative Commons CC-BY-SA sauf mention contraire.</p>
-                <p class="footer-note">Ce site est un projet fan-made et n'est pas affilié à Blizzard Entertainment.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Effets de particules -->
-    <div class="particles"></div>
-    
-    <!-- Scripts JavaScript -->
-    <!-- Attention: L'ordre d'inclusion est important -->
-    <script src="js/config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/sidebar.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/main.js"></script>
-    
-    <!-- Script d'initialisation personnalisé -->
-    <script>
-        // Configuration personnalisée
-        window.CUSTOM_CONFIG = {
-            debugMode: true,
-            animationsEnabled: true,
-            sidebarConfig: {
-                debugMode: false,
-                animationDuration: 350
-            }
-        };
-        
-        // Événements personnalisés
-        document.addEventListener('app:ready', function() {
-            console.log('GnomePédia est prêt à explorer!');
-            
-            // Exemple: ouvrir la sidebar après 2 secondes (démonstration)
-            // setTimeout(() => {
-            //     window.app.getSidebar()?.open();
-            // }, 2000);
-        });
-        
-        document.addEventListener('sidebar:open', function() {
-            console.log('Navigation ouverte');
-        });
-        
-        document.addEventListener('sidebar:close', function() {
-            console.log('Navigation fermée');
-        });
-        
-        // Smooth scroll pour les ancres
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+        </section>
+
+
+
+
+
+
+
+</main>
+<script src="nav.js"></script>
+<!-- END Contenu principal -->
+<script src="js-assets/main.js"></script>
+<!-- Scripts JavaScript -->
+<script src="js-assets/initParticles.js"></script>
+
+
 </body>
 </html>
