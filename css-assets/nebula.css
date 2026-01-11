@@ -10,6 +10,7 @@
       z-index: var(--z-stars);
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       overflow: hidden;
+       opacity: 0.3 !important; /* Rendez-le semi-transparent pour voir ce qu'il y a derrière */
     }
 
     .stars {
