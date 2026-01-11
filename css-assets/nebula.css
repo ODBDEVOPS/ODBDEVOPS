@@ -7,9 +7,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: var(--z-stars);
+      /*z-index: var(--z-stars);*/
+       z-index: 0 !important;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       overflow: hidden;
+       
        opacity: 0.3 !important; /* Rendez-le semi-transparent pour voir ce qu'il y a derrière */
     }
 
