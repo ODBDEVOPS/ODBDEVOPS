@@ -1,0 +1,55 @@
+/* ===== SECTIONS GÉNÉRIQUES ===== */
+main {
+    padding-top: 80px;
+    position: relative;
+    z-index: 1;
+}
+
+.section {
+    padding: 4rem 0;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Conteneurs de section */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Section avec fond spécial */
+.section-dark {
+    background: rgba(10, 14, 23, 0.8);
+}
+
+.section-gradient {
+    background: linear-gradient(135deg, rgba(10, 14, 23, 0.9), rgba(30, 41, 59, 0.9));
+}
+
+/* Animation d'entrée de section */
+.section-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

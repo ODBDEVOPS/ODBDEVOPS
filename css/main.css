@@ -1,0 +1,107 @@
+/* ===== MAIN CSS FILE ===== */
+/* Import des styles de base */
+@import 'base/reset.css';
+@import 'base/variables.css';
+@import 'base/typography.css';
+@import 'base/utilities.css';
+
+/* Import des composants */
+@import 'components/navigation.css';
+@import 'components/buttons.css';
+@import 'components/cards.css';
+@import 'components/forms.css';
+@import 'components/gallery.css';
+
+/* Import du layout */
+@import 'layout/header.css';
+@import 'layout/footer.css';
+@import 'layout/grid.css';
+
+/* Import des sections */
+@import 'sections/hero.css';
+@import 'sections/general.css';
+@import 'sections/contact.css';
+@import 'sections/technology.css';
+
+/* Import des thèmes et animations */
+@import 'themes/animations.css';
+@import 'themes/dark-mode.css';
+
+/* Styles globaux supplémentaires */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+/* Optimisations pour 8K */
+@media screen and (min-width: 7680px) {
+    .hero-section {
+        padding: 15rem 0 10rem;
+    }
+    
+    .section {
+        padding: 12rem 0;
+    }
+    
+    .tech-card, .character-card {
+        padding: 4rem 3rem;
+    }
+    
+    .map-visual {
+        height: 700px;
+    }
+    
+    .location {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+    }
+}
+
+/* Optimisations pour navigation mobile */
+@media (max-width: 768px) {
+    .menu-link, .submenu-item > a {
+        padding: 1.3rem 1.5rem;
+        min-height: 65px;
+        font-size: 1.2rem;
+    }
+    
+    .cta-gnome-button {
+        padding: 1.3rem 2.2rem;
+        min-height: 60px;
+        font-size: 1.2rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-gnome-buttons {
+        flex-direction: column;
+    }
+    
+    .mobile-toggle {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .tech-card, .character-card {
+        padding: 2rem 1.5rem;
+        min-height: 250px;
+    }
+    
+    .social-icons a {
+        width: 65px;
+        height: 65px;
+    }
+}

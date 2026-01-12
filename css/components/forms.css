@@ -1,0 +1,154 @@
+/* ===== FORMULAIRES ===== */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: rgba(30, 41, 59, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: 'Exo 2', sans-serif;
+    transition: var(--transition-normal);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--quantum-teal);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+}
+
+.form-control::placeholder {
+    color: rgba(148, 163, 184, 0.6);
+}
+
+/* Textarea spécifique */
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Form rows */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+/* Champs de recherche */
+.search-box {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    background-color: rgba(30, 41, 59, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group select,
+.contact-form .form-group textarea {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    background: rgba(42, 42, 62, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: 'Exo 2', sans-serif;
+    transition: var(--transition-normal);
+}
+
+.contact-form .form-group input:focus,
+.contact-form .form-group select:focus,
+.contact-form .form-group textarea:focus {
+    border-color: var(--quantum-teal);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+}
+
+/* Checkboxes et Radios */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.form-check-input {
+    margin-right: 0.75rem;
+}
+
+.form-check-label {
+    color: var(--text-secondary);
+}
+
+/* Validation */
+.form-control.is-valid {
+    border-color: var(--success-green);
+}
+
+.form-control.is-invalid {
+    border-color: var(--error-red);
+}
+
+.form-feedback {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.form-feedback.valid {
+    color: var(--success-green);
+}
+
+.form-feedback.invalid {
+    color: var(--error-red);
+}
+
+/* Form tabs */
+.tab-form-control {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgba(30, 41, 59, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: var(--transition-normal);
+}
+
+.tab-form-control:focus {
+    outline: none;
+    border-color: var(--quantum-teal);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+}
