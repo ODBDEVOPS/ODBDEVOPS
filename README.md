@@ -3,7 +3,7 @@
 Je suis développeur / passionné de tech et voici quelques-uns de mes projets GitHub. 🚀
 
 ---
-## Mes projets
+## Idle GAME projets
 
 | Projet | Description | Lien | Web |
 |--------|------------|------|------|
