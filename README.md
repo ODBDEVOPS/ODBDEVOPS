@@ -3,6 +3,13 @@
 Je suis développeur / passionné de tech et voici quelques-uns de mes projets GitHub. 🚀
 
 ---
+## Mes projets
+
+| Projet | Description | Lien |
+|--------|------------|------|
+| quantumforge-idle | Une petite app web | [GitHub](https://github.com/ODBDEVOPS/quantumforge-idle) |
+| Projet 2 | API RESTful en Python | [GitHub](https://github.com/tonutilisateur/projet2) |
+| Projet 3 | Bot Discord | [GitHub](https://github.com/tonutilisateur/projet3) |
 
 ## Mes Projets GitHub
 
