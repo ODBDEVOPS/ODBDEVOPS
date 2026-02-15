@@ -5,11 +5,11 @@ Je suis développeur / passionné de tech et voici quelques-uns de mes projets G
 ---
 ## Mes projets
 
-| Projet | Description | Lien |
-|--------|------------|------|
-| quantumforge-idle | Une petite app web | [GitHub](https://github.com/ODBDEVOPS/quantumforge-idle) |
-| Projet 2 | API RESTful en Python | [GitHub](https://github.com/tonutilisateur/projet2) |
-| Projet 3 | Bot Discord | [GitHub](https://github.com/tonutilisateur/projet3) |
+| Projet | Description | Lien | Web |
+|--------|------------|------|------|
+| quantumforge-idle | Une petite app web | [GitHub](https://github.com/ODBDEVOPS/quantumforge-idle) |[GitHub](https://odbdevops.github.io/quantumforge-idle/) |
+| Projet 2 | API RESTful en Python | [GitHub](https://github.com/tonutilisateur/projet2) | [GitHub](https://github.com/tonutilisateur/projet2) |
+| Projet 3 | Bot Discord | [GitHub](https://github.com/tonutilisateur/projet3) | [GitHub](https://github.com/tonutilisateur/projet2) |
 
 ## Mes Projets GitHub
 
